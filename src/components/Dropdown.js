@@ -20,7 +20,7 @@ class DropDown extends Component {
           {
 
             this.props.list.map((item, index) => (
-              <option key={index} value={item.value}>{item.name}</option>
+              <option key={index} value={item}>{item}</option>
             ))
           }
           </select>

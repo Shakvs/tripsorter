@@ -3,8 +3,7 @@ import Dropdown from './components/Dropdown';
 import Options from './components/Options';
 import Buttons from './components/Buttons';
 import Triplist from './components/Triplist';
-import data from './dataproviders/fares.json';
-import {algo ,graph} from './services/tripsorter.js';
+import {algo ,graph ,departureList ,arrivalList} from './services/tripsorter.js';
 
 const divStyle = {
   margin: '40px',
@@ -16,8 +15,8 @@ class App extends Component {
 	constructor(props){
     super(props)
     this.state = {
-        fromlist : [ { name : 'London', value :'London'}, { name : 'Paris', value :'Paris'}, { name : 'Moscow', value :'Moscow'}, { name : 'Mandrid', value :'Mandrid'}, { name : 'Berlin', value :'Berlin'}],
-        tolist : [ { name : 'London', value :'London'}, { name : 'Paris', value :'Paris'}, { name : 'Moscow', value :'Moscow'}, { name : 'Mandrid', value :'Mandrid'},{ name : 'Berlin', value :'Berlin'}],
+        fromlist : departureList,
+        tolist : arrivalList,
         buttonlist:[ { name : 'Search', type :'Search' ,'class' : 'success'}, { name : 'Reset', value :'Reset', 'class' : 'primary'}],
         fromselected: '',
         toselected: '',
@@ -42,6 +41,7 @@ handleChange(event) {
 
   handleOptionChange(value, event) {
     this.setState({ value }); 
+
     
   }
 
@@ -53,7 +53,7 @@ handleSubmit(event){
      console.log(this.state);
      console.log(this.state.value);
      this.setState({tripsortedlist: algo.run(graph,this.state.fromselected, this.state.toselected,(this.state.value ==1)?'': 'duration', true)});
-     console.log(this.state.fromselected);
+     console.log(this.state.tripsortedlist);
 
 
     event.preventDefault();
@@ -61,6 +61,10 @@ handleSubmit(event){
  handleReset(value, event) {
     this.setState({hasReset: true});
     this.setState({title: 'Lets Travel'});
+    this.setState({toselected: ''});
+    this.setState({fromselected: ''});
+    this.setState({value: 1});
+    
     
   }
 	render() {	 
