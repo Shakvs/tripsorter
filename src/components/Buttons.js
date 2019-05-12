@@ -9,7 +9,7 @@ constructor(props, context) {
 
   render() {
     return (  
-           <div className="text-center" ><Button as="input" type="submit" value={this.props.list.name}  variant={this.props.list.class} size="lg" onClick={this.props.onClick} style={{marginTop: '15px'}}/>   </div>  
+           <div className="text-center" ><Button as="input" type="submit" value={this.props.list.name}  variant={this.props.list.class} size="lg" onClick={this.props.onClick} style={{marginTop: '15px'}} disabled ={this.props.disabled}/>   </div>  
 );
     
   }

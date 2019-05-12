@@ -112,8 +112,8 @@ class DijkstrasAlgorithm {
       var currNode, startNode, adjacencyList, costs = {}, backtrace = {}, totalcost=0;
      
       label = label || 'cost';
-      console.log('Costs');
-      console.log(costs);
+     // console.log('Costs');
+    //  console.log(costs);
       for(var i=0;i<this.nodes.length;i++){
          costs[this.nodes[i]] = {};
          costs[this.nodes[i]].cost = Infinity;
@@ -173,7 +173,7 @@ class DijkstrasAlgorithm {
         costs[currNode[0]].done = true;
       }
       
- //Below code is uncommented to trace the shortest path from node to endNode
+ // trace the shortest path from node to endNode
       var currNod = endNode;
       var trace = [];
       trace.push({node:currNod, weight: '', transport: '' ,travelcost:'' , duration:'' , reference:'' });

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Dropdown from './components/Dropdown';
 import Options from './components/Options';
 import Buttons from './components/Buttons';
+import Checkbox from './components/Checkbox';
 import Triplist from './components/Triplist';
 import {algo ,graph ,departureList ,arrivalList} from './services/tripsorter.js';
 
@@ -9,6 +10,8 @@ const divStyle = {
   margin: '40px',
   
 };
+
+
 class App extends Component {
 
 
@@ -21,17 +24,20 @@ class App extends Component {
         fromselected: '',
         toselected: '',
         value:1,
+        checked:true,
         isSubmitted:null,
         hasReset:null,
         title:'Lets Travel',
-        tripsortedlist:''
+        tripsortedlist:'',
+        
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this); 
     this.handleOptionChange = this.handleOptionChange.bind(this); 
     this.handleReset = this.handleReset.bind(this); 
-     console.log(algo);
+    this.handleCheck = this.handleCheck.bind(this); 
+     //console.log(algo);
   }
 
 handleChange(event) {
@@ -44,16 +50,20 @@ handleChange(event) {
 
     
   }
+handleCheck() {
+    this.setState({checked: !this.state.checked});
+   
+    
+  }
+ 
 
-handleSubmit(event){
-     console.log("clicked ME");
+handleSubmit(event){     
      this.setState({isSubmitted: true});
      this.setState({hasReset: null});
      this.setState({title: 'Trip lists'});
-     console.log(this.state);
-     console.log(this.state.value);
-     this.setState({tripsortedlist: algo.run(graph,this.state.fromselected, this.state.toselected,(this.state.value ==1)?'': 'duration', true)});
-     console.log(this.state.tripsortedlist);
+     //console.log(this.state);     
+     this.setState({tripsortedlist: algo.run(graph,this.state.fromselected, this.state.toselected,(this.state.value ==1)?'': 'duration', this.state.checked)});
+     
 
 
     event.preventDefault();
@@ -68,7 +78,7 @@ handleSubmit(event){
     
   }
 	render() {	 
-       
+       const isEnabled =this.state.fromselected && this.state.toselected;
        return (
            <section id="contact" className="wow fadeInUp" >
            <div className="container" >
@@ -84,7 +94,8 @@ handleSubmit(event){
                <Dropdown list={this.state.fromlist} name="from" onChange={this.handleChange}  title='FROM'/>
                <Dropdown list={this.state.tolist}  name="to" onChange={this.handleChange} title='TO' />
                 <Options onChange={this.handleOptionChange}/>
-                <Buttons  list={this.state.buttonlist[0]} />                
+                <Checkbox onChange={this.handleCheck} default={this.state.checked}/>
+                <Buttons  list={this.state.buttonlist[0]}  disabled={!isEnabled}/>                
                </form> 
               
                </div></div>    
@@ -98,7 +109,8 @@ handleSubmit(event){
         </div>
 
         </section>
-         
+          
+          
 
        	) ;
 	  }
