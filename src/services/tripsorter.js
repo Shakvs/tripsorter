@@ -137,7 +137,7 @@ class DijkstrasAlgorithm {
               time = adjacencyList[i]['meta']['duration'].h + ' hrs ' + adjacencyList[i]['meta']['duration'].m +' mnts' ,
               travelcost= adjacencyList[i]['meta'].cost;
               if(discount)
-              { travelcost -=  adjacencyList[i]['meta'].discount ;
+              { travelcost -= (travelcost* (adjacencyList[i]['meta'].discount /100)) ;
                 if(travelcost<0)
                   travelcost=0;
               }
