@@ -91,8 +91,8 @@ handleSubmit(event){
           <div className="row justify-content-center">
           <div className="col-lg-5 col-md-8"><div className="form">            
            	   <form action="" method="post" role="form" className="contactForm" onSubmit={this.handleSubmit}>
-               <Dropdown list={this.state.fromlist} name="from" onChange={this.handleChange}  title='FROM'/>
-               <Dropdown list={this.state.tolist}  name="to" onChange={this.handleChange} title='TO' />
+               <Dropdown list={this.state.fromlist} name="from" onChange={this.handleChange}  title='FROM' optiondisable={this.state.toselected}/>
+               <Dropdown list={this.state.tolist}  name="to" onChange={this.handleChange} title='TO' optiondisable={this.state.fromselected} />
                 <Options onChange={this.handleOptionChange}/>
                 <Checkbox onChange={this.handleCheck} default={this.state.checked}/>
                 <Buttons  list={this.state.buttonlist[0]}  disabled={!isEnabled}/>                
